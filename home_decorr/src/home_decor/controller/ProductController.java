@@ -4,8 +4,8 @@
  */
 package home_decor.controller;
 
-//import java.io.*;
-import home_decor.model.home_decor_model;
+
+import home_decor.model.HomeDecorModel;
 import home_decor.util.ValidationUtil;
 
 import java.util.ArrayList;
@@ -17,12 +17,22 @@ import java.util.List;
  * @author Dell
  */
 public class ProductController {
-    private List<home_decor_model> productList= new ArrayList<>();
+    private List<HomeDecorModel> productList= new ArrayList<>();
+    // Assuming the view and model are passed during initialization
+    //private HomeDecor productView;
+   // private HomeDecorModel productModel;
 
     public ProductController() {
         productList = new ArrayList<>();
+        //this.productView = view;
+        //this.productModel = model;
     }
-
+    //ggg
+    
+    
+    
+    
+    //
     public boolean addProduct(String productId,String productName,String category,String price,String status,String description,String stockQuantity,String sold,String date) {
         if (!ValidationUtil.isValidProductId(productId) ||
             !ValidationUtil.isValidProductName(productName) ||
@@ -38,7 +48,7 @@ public class ProductController {
         }
         
         // ggg
-        home_decor_model product = new home_decor_model(
+        HomeDecorModel product = new HomeDecorModel(
                 Integer.parseInt(productId),
                 productName,
                 category,
@@ -58,25 +68,9 @@ public class ProductController {
                 return true;
     
     }
-        //
-    
-        
-        
- 
     
 
-    
-        
-    
-
-    //
-    
-    //
-    
-    
-        
-
-    public List<home_decor_model> getProductList() {
+    public List<HomeDecorModel> getProductList() {
         return productList;
   }
     

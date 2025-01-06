@@ -10,7 +10,7 @@ package home_decor.model;
  *
  * @author Dell
  */
-public class home_decor_model {
+public class HomeDecorModel {
     private int product_Id;
     private String product_name;
     private String category;
@@ -23,7 +23,7 @@ public class home_decor_model {
     
     
     
-    public home_decor_model(int product_Id, String product_name, String category, double price, String status, String description,int stockQuantity, int sold, String date){
+    public HomeDecorModel(int product_Id, String product_name, String category, double price, String status, String description,int stockQuantity, int sold, String date){
         this.product_Id = product_Id;
         this.product_name = product_name;
         this.category = category;
@@ -100,6 +100,9 @@ public class home_decor_model {
     public void setDate(String date){
         this.date = date;
     }
+    //
+    
+    //
     
     
     
