@@ -9,30 +9,33 @@ import java.util.List;
 
 /**
  *
- * @author Dell
+ * @author Riya Bhatta
+ * 23048574
  */
 public class BinarySearchAlgorithm {
-     public HomeDecorModel searchByName(String searchValue, List
-             <HomeDecorModel> studentList,
-            int left, int right) {
-
-        // Base Case
-        if (right < left) {
-            return null;
+     public int searchByName(String searchValue, List<HomeDecorModel> productList, int left, int right) {
+        if (productList == null || productList.isEmpty()) {
+            throw new IllegalArgumentException("Product list cannot be null or empty.");
         }
 
-        // mid value
-        int mid = (left + right) / 2;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            HomeDecorModel midProduct = productList.get(mid);
+            
+            // Debugging: Print the middle product name and the comparison
+        System.out.println("Comparing: " + midProduct.getProduct_Name() + " with " + searchValue);
 
-        // checks whether searchKey lies on mid point
-        if (searchValue.compareToIgnoreCase(studentList.get(mid).getProduct_Name()) == 0) {
-            return studentList.get(mid);
-        } else if (searchValue.compareToIgnoreCase(studentList.get(mid).getProduct_Name()) < 0) {
-            return searchByName(searchValue, studentList, left, mid - 1);
-        } else {
-            return searchByName(searchValue, studentList, mid + 1, right);
+            int comparisonResult = midProduct.getProduct_Name().compareToIgnoreCase(searchValue);
+
+            if (comparisonResult == 0) {
+                return mid; // Found the product
+            } else if (comparisonResult < 0) {
+                left = mid + 1; // Search in the right half
+            } else {
+                right = mid - 1; // Search in the left half
+            }
         }
-
+        return -1; // Not found
     }
     
 }

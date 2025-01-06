@@ -17,6 +17,7 @@ import home_decor.model.HomeDecorModel;
 import home_decor.controller.algorithim.SelectionSort;
 import home_decor.controller.algorithim.InsertionSort;
 import home_decor.controller.algorithim.MergeSort;
+import java.util.ArrayList;
 //import java.util.ArrayList;
 //import java.util.ArrayList;
 
@@ -2344,48 +2345,70 @@ private void highlightInvalidFields(String productId, String productName, String
     }//GEN-LAST:event_pswJFieldActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
-         String searchValue = searchJField.getText().trim();
-         if (searchValue.isEmpty()){
-             JOptionPane.showMessageDialog(this,"Please enter a product name to search");
-             return;
-         }
-         
-         BinarySearchAlgorithm binarySearch = new BinarySearchAlgorithm();
-         HomeDecorModel result = binarySearch.searchByName(searchValue,productList,0,productList.size()-1);
-         
-         if (result != null){
-             // move the product search result to the top
-             productList.remove(result);
-             productList.add(0,result);
-             // highligh the search result
-             productTbl.repaint();
-             
-             int rowIndex  = 0;
-             productTbl.setRowSelectionInterval(rowIndex,rowIndex);
-             productTbl.scrollRectToVisible(productTbl.getCellRect(rowIndex,0 ,true));
-             
-             JOptionPane.showMessageDialog(this, "Product Found:"+ result.getProduct_Name());
-             
-         }else{
-             JOptionPane.showMessageDialog(this,"Product not found");
-         }
-         
-         
-         
-
+          String searchValue = searchJField.getText().trim();
+    if (searchValue.isEmpty()){
+        JOptionPane.showMessageDialog(this,"Please enter a product name to search");
+        return;
+    }
     
+    if (selectedSortBy != null) {
+        // Re-sort the list based on the selected criteria and order
+        triggerSort(selectedSortBy, descRadioBtn.isSelected());
+    }
 
+    BinarySearchAlgorithm binarySearch = new BinarySearchAlgorithm();
+    int resultIndex = binarySearch.searchByName(searchValue, productList, 0, productList.size() - 1);
 
-
-
-    
+    // Handle the search result
+    handleSearchResult(productList, resultIndex, searchValue);
         
-        
-    
-
         
     }//GEN-LAST:event_searchBtnActionPerformed
+private void handleSearchResult(List<HomeDecorModel> sortedProductList, int resultIndex, String searchBy) {
+    
+    List<HomeDecorModel> originalList = new ArrayList<>(sortedProductList);
 
+    if (resultIndex != -1) { // If the product is found
+        // Move the product to the top of the list
+        HomeDecorModel searchedProduct = sortedProductList.remove(resultIndex);
+        sortedProductList.add(0, searchedProduct);
+
+        // Update the table with the modified list
+        updateProductTable(sortedProductList);
+
+        // Highlight the top row in the table
+        productTbl.setRowSelectionInterval(0, 0); // Select the first row
+        productTbl.scrollRectToVisible(productTbl.getCellRect(0, 0, true)); // Ensure visibility
+        productTbl.setSelectionBackground(Color.GRAY); // Optional: Highlight background color
+
+        JOptionPane.showMessageDialog(this, searchBy + " found and moved to the top!", "Success", JOptionPane.INFORMATION_MESSAGE);
+    } else {
+        JOptionPane.showMessageDialog(this, searchBy + " not found", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    // After search, update the list to its original order (if you moved items to the top)
+    updateProductTable(originalList);
+}
+
+/*private void handleSearchResult(List<HomeDecorModel> sortedProductList, int resultIndex, String searchBy) {
+    if (resultIndex != -1) { // If the product is found
+        // Move the product to the top of the list
+        HomeDecorModel searchedProduct = sortedProductList.remove(resultIndex);
+        sortedProductList.add(0, searchedProduct);
+
+        // Update the table with the modified list
+        updateProductTable(sortedProductList);
+
+        // Highlight the top row in the table
+        productTbl.setRowSelectionInterval(0, 0); // Select the first row
+        productTbl.scrollRectToVisible(productTbl.getCellRect(0, 0, true)); // Ensure visibility
+        productTbl.setSelectionBackground(Color.GRAY); // Optional: Highlight background color
+
+        JOptionPane.showMessageDialog(this, searchBy + " found and moved to the top!", "Success", JOptionPane.INFORMATION_MESSAGE);
+    } else {
+        JOptionPane.showMessageDialog(this, searchBy + " not found", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}*/
 
 
     private void ascRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascRadioBtnActionPerformed

@@ -10,6 +10,7 @@ import java.util.List;
 /**
  *
  * @author Riya Bhatta
+ * 23048574
  */
 // It begins the merge sort algorithm for sorting a list of HomeDecorModel objects
 /* isDesc flag is passed to specify whether the list should be sorted in descending order (if true) 
