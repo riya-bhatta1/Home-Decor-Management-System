@@ -14,7 +14,7 @@ import java.util.List;
  */
 // InsertionSort class implements the insertion sort algorithm ofr sorting list of HomeDecorModel objects
 public class InsertionSort {
-// A private list is used to hole a copy of the list to be sorted
+// A private list is used to hold a copy of the list to be sorted
     private List<HomeDecorModel> homeDecorSortList;
 // Initializes the homeDecorSortList as an empty ArrayList
     public InsertionSort() {
@@ -51,7 +51,7 @@ shifts elements one position to right to make space for the key */
     private boolean shouldSwap(HomeDecorModel current, HomeDecorModel key, boolean isDesc, String sortBy) {
         int comparison = 0;
         if ("Product Name".equalsIgnoreCase(sortBy)) {
-            comparison = current.getCategory().compareToIgnoreCase(key.getCategory());
+            comparison = current.getProduct_Name().compareToIgnoreCase(key.getProduct_Name());
         } 
 // Returns true if the elements should be swapped
         return isDesc ? comparison < 0 : comparison > 0;

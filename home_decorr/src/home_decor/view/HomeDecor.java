@@ -11,25 +11,18 @@ import java.awt.Color;
 import home_decor.controller.ProductController;
 import home_decor.controller.algorithim.BinarySearchAlgorithm;
 import home_decor.model.HomeDecorModel;
-//import javax.swing.DefaultComboBoxModel;
-//import javax.swing.event.ChangeEvent;
-//import javax.swing.event.ChangeListener;
 import home_decor.controller.algorithim.SelectionSort;
 import home_decor.controller.algorithim.InsertionSort;
 import home_decor.controller.algorithim.MergeSort;
 import java.util.ArrayList;
-//import java.util.ArrayList;
-//import java.util.ArrayList;
-
 import java.util.List;
-
 import javax.swing.JOptionPane;
-//import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Dell
+ * @author Riya Bhatta
+ * 23048574
  */
 public class HomeDecor extends javax.swing.JFrame {
     private List<HomeDecorModel> productList;//holds the list of products
@@ -37,75 +30,14 @@ public class HomeDecor extends javax.swing.JFrame {
     private java.awt.CardLayout cardLayout;
     private String selectedSortBy = null;
 
-   /*//ggg
-    // Selection Sort for Product IDs (integers)
-    public static void selectionSort(int[] array) {
-        int n = array.length;
-        for (int i = 0; i < n - 1; i++) {
-            int minIndex = i;
-            for (int j = i + 1; j < n; j++) {
-                if (array[j] < array[minIndex]) {
-                    minIndex = j;
-                }
-            }
-            int temp = array[minIndex];
-            array[minIndex] = array[i];
-            array[i] = temp;
-        }
-    }
-
-    // Insertion Sort for Product Names (strings)
-    public static void insertionSort(String[] array) {
-        int n = array.length;
-        for (int i = 1; i < n; i++) {
-            String key = array[i];
-            int j = i - 1;
-            while (j >= 0 && array[j].compareTo(key) > 0) {
-                array[j + 1] = array[j];
-                j--;
-            }
-            array[j + 1] = key;
-        }
-    }
-
-    // Binary Search for Product IDs (integer)
-    public static int binarySearch(int[] array, int target) {
-        int left = 0;
-        int right = array.length - 1;
-        
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            if (array[mid] == target) {
-                return mid;
-            } else if (array[mid] < target) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
-        }
-        return -1; // Not found
-    }
-
-    // Method to handle search functionality when Search Button is clicked
-    /*private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        String searchData = SearchTextField.getText().trim();
-        if (searchData.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter a search term", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
-        
-    }*/
-    //*/
-
-    
+  
     /**
      * Creates new form home_decor
      */
     public HomeDecor() {
         initComponents();
         initializeLayout();
-        initializeData();
+        inputData();
         productController=new ProductController();
         //product_table = new JTable();
     }
@@ -233,6 +165,14 @@ public class HomeDecor extends javax.swing.JFrame {
         statusJComboBox = new javax.swing.JComboBox<>();
         soldJField = new javax.swing.JTextField();
         stockQuantityJField = new javax.swing.JTextField();
+        productNameValidJField = new javax.swing.JTextField();
+        categoryValidJField = new javax.swing.JTextField();
+        productIdValidJField = new javax.swing.JTextField();
+        priceValidJField = new javax.swing.JTextField();
+        descriptionValidJField = new javax.swing.JTextField();
+        soldValidJField = new javax.swing.JTextField();
+        stockValidJField = new javax.swing.JTextField();
+        dateValidJField = new javax.swing.JTextField();
         searchJField = new javax.swing.JTextField();
         searchBtn = new javax.swing.JButton();
         descRadioBtn = new javax.swing.JRadioButton();
@@ -610,7 +550,7 @@ public class HomeDecor extends javax.swing.JFrame {
                 .addComponent(mainPicHome, javax.swing.GroupLayout.PREFERRED_SIZE, 2860, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 422, Short.MAX_VALUE))
+                .addGap(0, 473, Short.MAX_VALUE))
         );
         homePnlLayout.setVerticalGroup(
             homePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -938,7 +878,7 @@ public class HomeDecor extends javax.swing.JFrame {
             .addGroup(aboutUsPnlLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lightingPic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 1113, Short.MAX_VALUE))
+                .addGap(14, 1164, Short.MAX_VALUE))
         );
         aboutUsPnlLayout.setVerticalGroup(
             aboutUsPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1106,7 +1046,7 @@ public class HomeDecor extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(adminDashboardPnlLayout.createSequentialGroup()
                         .addComponent(profitPnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                         .addComponent(bestSellerPnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(1747, 1747, 1747))
         );
@@ -1267,66 +1207,180 @@ public class HomeDecor extends javax.swing.JFrame {
             }
         });
 
+        productNameValidJField.setBackground(new java.awt.Color(94, 106, 88));
+        productNameValidJField.setForeground(new java.awt.Color(255, 255, 255));
+        productNameValidJField.setBorder(null);
+        productNameValidJField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productNameValidJFieldActionPerformed(evt);
+            }
+        });
+
+        categoryValidJField.setBackground(new java.awt.Color(94, 106, 88));
+        categoryValidJField.setForeground(new java.awt.Color(255, 255, 255));
+        categoryValidJField.setBorder(null);
+        categoryValidJField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoryValidJFieldActionPerformed(evt);
+            }
+        });
+
+        productIdValidJField.setBackground(new java.awt.Color(94, 106, 88));
+        productIdValidJField.setForeground(new java.awt.Color(255, 255, 255));
+        productIdValidJField.setBorder(null);
+        productIdValidJField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productIdValidJFieldActionPerformed(evt);
+            }
+        });
+
+        priceValidJField.setBackground(new java.awt.Color(94, 106, 88));
+        priceValidJField.setForeground(new java.awt.Color(255, 255, 255));
+        priceValidJField.setBorder(null);
+        priceValidJField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                priceValidJFieldActionPerformed(evt);
+            }
+        });
+
+        descriptionValidJField.setBackground(new java.awt.Color(94, 106, 88));
+        descriptionValidJField.setForeground(new java.awt.Color(255, 255, 255));
+        descriptionValidJField.setBorder(null);
+        descriptionValidJField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descriptionValidJFieldActionPerformed(evt);
+            }
+        });
+
+        soldValidJField.setBackground(new java.awt.Color(94, 106, 88));
+        soldValidJField.setForeground(new java.awt.Color(255, 255, 255));
+        soldValidJField.setBorder(null);
+        soldValidJField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                soldValidJFieldActionPerformed(evt);
+            }
+        });
+
+        stockValidJField.setBackground(new java.awt.Color(94, 106, 88));
+        stockValidJField.setForeground(new java.awt.Color(255, 255, 255));
+        stockValidJField.setBorder(null);
+        stockValidJField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stockValidJFieldActionPerformed(evt);
+            }
+        });
+
+        dateValidJField.setBackground(new java.awt.Color(94, 106, 88));
+        dateValidJField.setForeground(new java.awt.Color(255, 255, 255));
+        dateValidJField.setBorder(null);
+        dateValidJField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dateValidJFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout homeDataFormPnlLayout = new javax.swing.GroupLayout(homeDataFormPnl);
         homeDataFormPnl.setLayout(homeDataFormPnlLayout);
         homeDataFormPnlLayout.setHorizontalGroup(
             homeDataFormPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(homeDataFormPnlLayout.createSequentialGroup()
-                .addGap(335, 335, 335)
-                .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
-                .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addComponent(clearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(retrieveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(homeDataFormPnlLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(productIdJField, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(productNameJField, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(categoryJField, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(priceJField, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(descriptionJField, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(stockQuantityJField, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(soldJField, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(dateJField, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(statusJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGroup(homeDataFormPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(homeDataFormPnlLayout.createSequentialGroup()
+                        .addGroup(homeDataFormPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(productIdJField, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(productIdValidJField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(homeDataFormPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homeDataFormPnlLayout.createSequentialGroup()
+                                .addComponent(productNameJField, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addComponent(categoryJField, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(priceJField, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29))
+                            .addGroup(homeDataFormPnlLayout.createSequentialGroup()
+                                .addComponent(productNameValidJField, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(categoryValidJField, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(priceValidJField, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)))
+                        .addGroup(homeDataFormPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(descriptionJField, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(descriptionValidJField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(homeDataFormPnlLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53)
+                        .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)))
+                .addGroup(homeDataFormPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(homeDataFormPnlLayout.createSequentialGroup()
+                        .addGroup(homeDataFormPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(homeDataFormPnlLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(stockQuantityJField, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
+                                .addComponent(soldJField, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10))
+                            .addGroup(homeDataFormPnlLayout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(stockValidJField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)
+                                .addComponent(soldValidJField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(homeDataFormPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(homeDataFormPnlLayout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(dateJField, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33)
+                                .addComponent(statusJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dateValidJField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(homeDataFormPnlLayout.createSequentialGroup()
+                        .addComponent(retrieveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(69, 69, 69)
+                        .addComponent(clearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         homeDataFormPnlLayout.setVerticalGroup(
             homeDataFormPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(homeDataFormPnlLayout.createSequentialGroup()
                 .addGroup(homeDataFormPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(homeDataFormPnlLayout.createSequentialGroup()
-                        .addGap(72, 72, 72)
+                        .addGap(19, 19, 19)
+                        .addComponent(soldValidJField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(homeDataFormPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(dateJField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(soldJField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(stockQuantityJField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(descriptionJField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(priceJField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(categoryJField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(productNameJField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(productIdJField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(priceJField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(descriptionJField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(stockQuantityJField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(soldJField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateJField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(homeDataFormPnlLayout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(statusJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(dateValidJField, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)
+                        .addComponent(statusJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(homeDataFormPnlLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(homeDataFormPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(productIdValidJField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                            .addComponent(productNameValidJField, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(categoryValidJField, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homeDataFormPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(priceValidJField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(descriptionValidJField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(stockValidJField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(homeDataFormPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(productIdJField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(productNameJField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(homeDataFormPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addBtn)
                     .addComponent(updateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(clearBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(retrieveBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(72, 72, 72))
+                    .addComponent(retrieveBtn))
+                .addGap(45, 45, 45))
         );
 
         searchJField.addActionListener(new java.awt.event.ActionListener() {
@@ -1387,8 +1441,8 @@ public class HomeDecor extends javax.swing.JFrame {
             productPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(productPnlLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(productPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, productPnlLayout.createSequentialGroup()
+                .addGroup(productPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(productPnlLayout.createSequentialGroup()
                         .addComponent(productIdBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(priceBtn)
@@ -1396,33 +1450,31 @@ public class HomeDecor extends javax.swing.JFrame {
                         .addComponent(productBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(resetBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(54, 54, 54)
                         .addComponent(ascRadioBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(descRadioBtn)
-                        .addGap(535, 535, 535)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(searchJField, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(searchBtn))
-                    .addComponent(homeDataFormPnl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(productTblScroll, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(2024, Short.MAX_VALUE))
+                    .addComponent(homeDataFormPnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(productTblScroll))
+                .addContainerGap(2104, Short.MAX_VALUE))
         );
         productPnlLayout.setVerticalGroup(
             productPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(productPnlLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(productPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(productPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(searchJField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(searchBtn)
-                        .addComponent(descRadioBtn))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, productPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(ascRadioBtn)
-                        .addComponent(priceBtn)
-                        .addComponent(productIdBtn)
-                        .addComponent(productBtn)
-                        .addComponent(resetBtn)))
+                .addGroup(productPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ascRadioBtn)
+                    .addComponent(priceBtn)
+                    .addComponent(productIdBtn)
+                    .addComponent(productBtn)
+                    .addComponent(resetBtn)
+                    .addComponent(descRadioBtn)
+                    .addComponent(searchJField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(productTblScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
@@ -1638,7 +1690,7 @@ public class HomeDecor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     // adding data in the table
-    private void initializeData() {
+    private void inputData() {
         productList = new LinkedList<>();
 
         // Registering sample products
@@ -1757,13 +1809,9 @@ public class HomeDecor extends javax.swing.JFrame {
     }//GEN-LAST:event_logOutButtonActionPerformed
     // Action Listener for the "Add" button
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-        // TODO add your handling code here:
-        // validate
-        // data linu
-        // list add
-        // list data table load (table clear)
         
-        // Get the values from the input fields
+       
+     
         String productId = productIdJField.getText();
         String productName = productNameJField.getText();
         String category =  categoryJField.getText();  
@@ -1821,26 +1869,15 @@ public class HomeDecor extends javax.swing.JFrame {
     }
 
         //
-    private void refreshProductTable() {
+   private void refreshProductTable() {
         // Get the product list from the controller
         List<HomeDecorModel> productList = productController.getProductList();
 
         // Clear the existing rows in the table
         DefaultTableModel model = (DefaultTableModel) productTbl.getModel();
-        
-        //model.setRowCount(0);
-
         // Add each product from the list to the table
         for (HomeDecorModel product : productList) {
-            boolean exists = false;
-            // chech if product already exist in the table
-            for (int i=0; i< model.getRowCount();i++){
-                if (model.getValueAt(i,0).equals(product.getProduct_Id())){
-                    exists = true;
-                    break;
-                }
-            }
-        if (!exists){
+            
         model.addRow(new Object[] {
             product.getProduct_Id(),
             product.getProduct_Name(),
@@ -1853,9 +1890,6 @@ public class HomeDecor extends javax.swing.JFrame {
             product.getDate()
         });
     }
-        
-        
-}
 updateNewProductCountLabel();
 updateBestSellerTable();
 updateOutOfStockTable();
@@ -2010,46 +2044,59 @@ private void resetFieldColors() {
 }
 
 private void highlightInvalidFields(String productId, String productName, String category, String price, String status, String description,String stockQuantity, String sold, String date) {
+    
+    
     // Check each field and set background color to red if invalid
 
     if (!ValidationUtil.isValidProductId(productId)) {
         productIdJField.setBackground(Color.RED);
+        productIdValidJField.setText("Enter digits only");
+        
     }
     if (!ValidationUtil.isValidProductName(productName)) {
         productNameJField.setBackground(Color.RED);
+        productNameValidJField.setText("Enter letter only");
+        
     }
     if (!ValidationUtil.isValidCategory(category)) {
         categoryJField.setBackground(Color.RED);
+        categoryValidJField.setText("Enter letter only");
     }
     if (!ValidationUtil.isValidPrice(price)) {
         priceJField.setBackground(Color.RED);
+        priceValidJField.setText("Enter digits only");
     }
     if (!ValidationUtil.isValidStatus(status)) {
         statusJComboBox.setBackground(Color.RED);
     }
     if (!ValidationUtil.isValidDescription(description)) {
         descriptionJField.setBackground(Color.RED);
+        descriptionValidJField.setText("Enter letter only");
         
         
     }
     if (!ValidationUtil.isValidStockQuantity(stockQuantity)) {
         stockQuantityJField.setBackground(Color.RED);
+        stockValidJField.setText("Enter digits only");
         
         
     }
     if (!ValidationUtil.isValidSold(sold)) {
         soldJField.setBackground(Color.RED);
+        soldValidJField.setText("Enter digits only");
         
         
     }
     if (!ValidationUtil.isValidDate(date)) {
         dateJField.setBackground(Color.RED);
+        dateValidJField.setText("Follow YYYY-MM-DD");
     }
 
 //
         
     }//GEN-LAST:event_addBtnActionPerformed
     //
+    
    
 
 //
@@ -2126,115 +2173,11 @@ private void highlightInvalidFields(String productId, String productName, String
     } else {
         JOptionPane.showMessageDialog(this, "Product ID not found. Update failed.", "Error", JOptionPane.ERROR_MESSAGE);
     }
-         //
-    /*DefaultTableModel model = (DefaultTableModel) Product_table.getModel();
-    
-    // Get the number of rows in the table
-    int rowCount = model.getRowCount();
-    
-    // Check if there are rows in the table (i.e., at least one row)
-    if (rowCount > 0) {
-        // Get the last row index (the most recently added row)
-        int lastRowIndex = rowCount - 1;
-        
-        // Get the data from the text fields
-        // Get the values from the input fields
-        String productId = Product_id.getText();
-        String productName = Product_name.getText();
-        String category =  Category.getText();  
-        String price = Price.getText();
-        String status =  Status.getText();      
-        String description = Description.getText();
-        String date= Date.getText();
-        
-        //reset background for all fields
-        resetFieldColors();
-        
-        
-
-        try {
-            // Parse the age field as an integer
-            //int productId = Integer.parseInt(productId); // Parse age as integer
-
-            // Update the last row in the table with the new data
-            model.setValueAt(productId, lastRowIndex, 0);  // Update productid in the first column
-            model.setValueAt(productName, lastRowIndex, 1);  
-            model.setValueAt(category, lastRowIndex, 2);  
-            model.setValueAt(price, lastRowIndex, 3);  
-            model.setValueAt(status, lastRowIndex, 4);  
-            model.setValueAt(description, lastRowIndex, 5); 
-            model.setValueAt(date, lastRowIndex, 6); 
-
-            // Optionally clear the text fields after updating the row
-            //clear input fields
-            Product_id.setText("");
-            Product_name.setText("");
-            Category.setText("");
-            Price.setText("");
-            Status.setText("");
-            Description.setText("");
-            Date.setText("");
-            
-            refreshProductTable();
-
-        } catch (NumberFormatException e) {
-            // If age is not a valid number, show an error message
-            JOptionPane.showMessageDialog(this, "Age must be a valid number.", "Input Error", JOptionPane.ERROR_MESSAGE);
-        }
-    } else {
-        // If the table is empty, show an error message
-        JOptionPane.showMessageDialog(this, "No data to update.", "Update Error", JOptionPane.ERROR_MESSAGE);
-        // set red
-        
-    }*/
-        /*
-        String productId = Product_id.getText();
-        String productName = Product_name.getText();
-        String category =  Category.getText();  
-        String price = Price.getText();
-        String status =  Status.getText();      
-        String description = Description.getText();
-        String date= Date.getText();
-        
-        
-        //reset background for all fields
-        resetFieldColors();
-        //validate inputs
-        
-        // call controller to add the product
-        boolean isUpdated= productController.updateProduct(productId, productName, category, price, status, description,date);
-        
-        // If the product is added successfully
-        if(isUpdated){
-            JOptionPane.showMessageDialog(this, "Product added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            //clear input fields
-            Product_id.setText("");
-            Product_name.setText("");
-            Category.setText("");
-            Price.setText("");
-            Status.setText("");
-            Description.setText("");
-            Date.setText("");
-            // Refresh the product table
-            //refreshProductTablee();
-            
-        } else {
-            JOptionPane.showMessageDialog(this, "Validation failed. Please check the input fields.", "Error", JOptionPane.ERROR_MESSAGE);
-            
-            // set red
-            highlightInvalidFields(productId,productName,category,price,status,description,date);
-            
-        }*/
-
-
-        
-  
-        
-        //
+         
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
-        // TODO add your handling code here:
+        
         // Clear the input fields
         //gggg
         // Get the Product ID from the input field
@@ -2273,25 +2216,11 @@ private void highlightInvalidFields(String productId, String productName, String
     } else {
         JOptionPane.showMessageDialog(this, "Product ID not found. Clear operation failed.", "Error", JOptionPane.ERROR_MESSAGE);
     }
-    /*Product_id.setText("");
-    Product_name.setText("");
-    Category.setText("");
-    Price.setText("");
-    Status.setText("");
-    Description.setText("");
-    Date.setText("");
-
-    // Reset the background color of all fields to white (valid state)
-    resetFieldColors();
-
-    // Optionally, you could clear the product table as well:
-    DefaultTableModel model = (DefaultTableModel) Product_table.getModel();
-     model.setRowCount(0);  // This clears all rows in the table
-        */
+    
     }//GEN-LAST:event_clearBtnActionPerformed
 
     private void retrieveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retrieveBtnActionPerformed
-        // TODO add your handling code here:
+        
         //ggg
         
 
@@ -2302,26 +2231,7 @@ private void highlightInvalidFields(String productId, String productName, String
 
     JOptionPane.showMessageDialog(this, "Data loaded successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
 
-        //
-        // Get the product list (which contains all registered products)
-    /*DefaultTableModel model = (DefaultTableModel) Product_table.getModel();
-    
-    // Clear any existing rows in the table
-    //model.setRowCount(0);
-    
-    // Add each product in the product list to the table
-    for (HomeDecorModel product : productList) {
-        model.addRow(new Object[]{
-            product.getProduct_Id(),
-            product.getProduct_Name(),
-            product.getCategory(),
-            product.getPrice(),
-            product.getStatus(),
-            product.getDescription(),
-            product.getDate()
-        });
-    }*/
-        //
+        
     }//GEN-LAST:event_retrieveBtnActionPerformed
 
     private void soldJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soldJFieldActionPerformed
@@ -2390,25 +2300,6 @@ private void handleSearchResult(List<HomeDecorModel> sortedProductList, int resu
     updateProductTable(originalList);
 }
 
-/*private void handleSearchResult(List<HomeDecorModel> sortedProductList, int resultIndex, String searchBy) {
-    if (resultIndex != -1) { // If the product is found
-        // Move the product to the top of the list
-        HomeDecorModel searchedProduct = sortedProductList.remove(resultIndex);
-        sortedProductList.add(0, searchedProduct);
-
-        // Update the table with the modified list
-        updateProductTable(sortedProductList);
-
-        // Highlight the top row in the table
-        productTbl.setRowSelectionInterval(0, 0); // Select the first row
-        productTbl.scrollRectToVisible(productTbl.getCellRect(0, 0, true)); // Ensure visibility
-        productTbl.setSelectionBackground(Color.GRAY); // Optional: Highlight background color
-
-        JOptionPane.showMessageDialog(this, searchBy + " found and moved to the top!", "Success", JOptionPane.INFORMATION_MESSAGE);
-    } else {
-        JOptionPane.showMessageDialog(this, searchBy + " not found", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-}*/
 
 
     private void ascRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascRadioBtnActionPerformed
@@ -2461,6 +2352,38 @@ private void handleSearchResult(List<HomeDecorModel> sortedProductList, int resu
     private void searchJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchJFieldActionPerformed
         
     }//GEN-LAST:event_searchJFieldActionPerformed
+
+    private void productNameValidJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productNameValidJFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_productNameValidJFieldActionPerformed
+
+    private void categoryValidJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryValidJFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_categoryValidJFieldActionPerformed
+
+    private void productIdValidJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productIdValidJFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_productIdValidJFieldActionPerformed
+
+    private void priceValidJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceValidJFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_priceValidJFieldActionPerformed
+
+    private void descriptionValidJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descriptionValidJFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_descriptionValidJFieldActionPerformed
+
+    private void soldValidJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soldValidJFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_soldValidJFieldActionPerformed
+
+    private void stockValidJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stockValidJFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_stockValidJFieldActionPerformed
+
+    private void dateValidJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateValidJFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dateValidJFieldActionPerformed
     
 
     private List<HomeDecorModel> triggerSort(String sortBy, boolean isDesc) {
@@ -2558,6 +2481,7 @@ private void updateProductTable(List<HomeDecorModel> productList) {
     private javax.swing.JPanel bestSellerPnl;
     private javax.swing.JLabel bestSellerTitle;
     private javax.swing.JTextField categoryJField;
+    private javax.swing.JTextField categoryValidJField;
     private javax.swing.JButton clearBtn;
     private javax.swing.JLabel customerName;
     private javax.swing.JPanel customerReviewPanel;
@@ -2566,11 +2490,13 @@ private void updateProductTable(List<HomeDecorModel> productList) {
     private javax.swing.JLabel customizationPic;
     private javax.swing.JLabel customizationServiceTxt;
     private javax.swing.JTextField dateJField;
+    private javax.swing.JTextField dateValidJField;
     private javax.swing.JLabel deliveryPic;
     private javax.swing.JPanel deliveryPnl;
     private javax.swing.JLabel deliveryTxt;
     private javax.swing.JRadioButton descRadioBtn;
     private javax.swing.JTextField descriptionJField;
+    private javax.swing.JTextField descriptionValidJField;
     private javax.swing.JPanel dialogPanel;
     private javax.swing.JLabel fiveStarPic;
     private javax.swing.JLabel fiveStartPict;
@@ -2626,10 +2552,13 @@ private void updateProductTable(List<HomeDecorModel> productList) {
     private javax.swing.JLabel plantPicTxtLbl;
     private javax.swing.JButton priceBtn;
     private javax.swing.JTextField priceJField;
+    private javax.swing.JTextField priceValidJField;
     private javax.swing.JButton productBtn;
     private javax.swing.JButton productIdBtn;
     private javax.swing.JTextField productIdJField;
+    private javax.swing.JTextField productIdValidJField;
     private javax.swing.JTextField productNameJField;
+    private javax.swing.JTextField productNameValidJField;
     private javax.swing.JPanel productPnl;
     private javax.swing.JTable productTbl;
     private javax.swing.JScrollPane productTblScroll;
@@ -2654,9 +2583,11 @@ private void updateProductTable(List<HomeDecorModel> productList) {
     private javax.swing.JButton shopNowBtn;
     private javax.swing.JLabel sofaPicLbl;
     private javax.swing.JTextField soldJField;
+    private javax.swing.JTextField soldValidJField;
     private javax.swing.JComboBox<String> statusJComboBox;
     private javax.swing.JTextField stockQuantityJField;
     private javax.swing.JScrollPane stockScrollPnl;
+    private javax.swing.JTextField stockValidJField;
     private javax.swing.JLabel topCategoryLbl;
     private javax.swing.JLabel txtLbl;
     private javax.swing.JButton updateBtn;

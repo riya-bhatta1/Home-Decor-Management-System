@@ -6,7 +6,8 @@ package home_decor.util;
 
 /**
  *
- * @author Dell
+ * @author Riya Bhatta
+ * 23048574
  */
 import java.util.regex.Pattern;
 

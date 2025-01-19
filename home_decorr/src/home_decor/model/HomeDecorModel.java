@@ -8,7 +8,8 @@ package home_decor.model;
 
 /**
  *
- * @author Dell
+ * @author Riya Bhatta
+ * 23048574
  */
 public class HomeDecorModel {
     private int product_Id;

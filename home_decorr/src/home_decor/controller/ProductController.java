@@ -14,7 +14,8 @@ import java.util.List;
 ;
 /**
  *
- * @author Dell
+ * @author Riya Bhatta
+ * 23048574
  */
 public class ProductController {
     private List<HomeDecorModel> productList= new ArrayList<>();
