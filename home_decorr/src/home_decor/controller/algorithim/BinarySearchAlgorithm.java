@@ -3,9 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package home_decor.controller.algorithim;
+
 import home_decor.model.HomeDecorModel;
 import java.util.List;
-
+import java.util.Comparator;
 
 /**
  *
@@ -13,29 +14,39 @@ import java.util.List;
  * 23048574
  */
 public class BinarySearchAlgorithm {
-     public int searchByName(String searchValue, List<HomeDecorModel> productList, int left, int right) {
-        if (productList == null || productList.isEmpty()) {
-            throw new IllegalArgumentException("Product list cannot be null or empty.");
-        }
+  
+        public int searchByName (String searchValue, List<HomeDecorModel> productList, int left, int right){
+            if (productList == null || productList.isEmpty()){
+                throw new IllegalArgumentException ("Product list cannot be null or empty. ");
+            }
+        
+        productList.sort(Comparator.comparing(
+           product -> product.getProduct_Name().trim().toLowerCase()
+        
+        ));
+        
+        String anySearchValue = searchValue.trim().toLowerCase();
 
-        while (left <= right) {
+        while (left <= right){
             int mid = left + (right - left) / 2;
             HomeDecorModel midProduct = productList.get(mid);
             
-            // Debugging: Print the middle product name and the comparison
-        System.out.println("Comparing: " + midProduct.getProduct_Name() + " with " + searchValue);
-
-            int comparisonResult = midProduct.getProduct_Name().compareToIgnoreCase(searchValue);
-
-            if (comparisonResult == 0) {
-                return mid; // Found the product
-            } else if (comparisonResult < 0) {
-                left = mid + 1; // Search in the right half
+            String normalizeMidValue = midProduct.getProduct_Name().trim().toLowerCase();
+            
+            System.out.println("Comparing: " + normalizeMidValue + " with " + anySearchValue);
+            
+            int comparisonResult = normalizeMidValue.compareTo(anySearchValue);
+            
+            if (comparisonResult == 0){
+                return mid;
+            } else if (comparisonResult < 0){
+                left = mid+1;
             } else {
-                right = mid - 1; // Search in the left half
+                right = mid -1;
             }
-        }
-        return -1; // Not found
+        } 
+        return -1;
+         
     }
     
 }

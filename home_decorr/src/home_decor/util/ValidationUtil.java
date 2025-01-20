@@ -21,31 +21,35 @@ public class ValidationUtil {
     private static final Pattern DATE_PATTERN = Pattern.compile("^\\d{4}-\\d{2}-\\d{2}$"); // Date: "YYYY-MM-DD"
     private static final Pattern NON_NEGATIVE_INT_PATTERN = Pattern.compile("^\\d+$"); // Integer and cannot be negative
 
-    
-    
+    // validating integer for product id 
     public static boolean isValidProductId(String productId) {
         return productId != null && ID_PATTERN.matcher(productId).matches();
     }
-
+    
+    // validating string value for product name
     public static boolean isValidProductName(String productName) {
         return productName != null && NAME_PATTERN.matcher(productName).matches();
     }
-
+    
+    // validating string value for category
     public static boolean isValidCategory(String category) {
         return category != null && CATEGORY_PATTERN.matcher(category).matches();
     }
-
+    // validating integer for price
     public static boolean isValidPrice(String price) {
         return price != null && PRICE_PATTERN.matcher(price).matches();
     }
-
+    
+    // validating string value for status 
     public static boolean isValidStatus(String status) {
         return status != null && STATUS_PATTERN.matcher(status).matches();
     }
+    
     // non negative integer for stock quantity
     public static boolean isValidStockQuantity(String stockQuantity) {
         return stockQuantity != null && NON_NEGATIVE_INT_PATTERN.matcher(stockQuantity).matches();
     }
+    
     // non negative integer for sold
     public static boolean isValidSold(String sold) {
         return sold != null && NON_NEGATIVE_INT_PATTERN.matcher(sold).matches();

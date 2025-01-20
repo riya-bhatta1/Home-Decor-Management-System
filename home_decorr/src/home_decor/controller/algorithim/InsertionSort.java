@@ -22,23 +22,24 @@ public class InsertionSort {
     }
 // productList is the list to be sorted
 // isDesc indicates whether the sort should be in descendnig order
-// sortBy indicates the field name by which to sort
-    public List<HomeDecorModel> sort(List<HomeDecorModel> productList, boolean isDesc, String sortBy) {
+// sortBy indicates the field name by which to sort    
+    public List<HomeDecorModel> sort(List<HomeDecorModel> productList, boolean isDesc, String sortBy){
         homeDecorSortList.clear();
         homeDecorSortList.addAll(productList);
+    
 // Validates that the input list is not null, otherwise throws an exception
         if (homeDecorSortList == null || homeDecorSortList.isEmpty()) {
-            throw new IllegalArgumentException("Product list cannot be null or empty.");
+            throw new IllegalArgumentException("Product list cannnot be null or empty.");
         }
 /* Iterates through the list starting from the second element (i=1), treating it as 'key' to compare. 
 The variable j is used to traverse backward through sorted section*/
-        for (int i = 1; i < homeDecorSortList.size(); i++) {
+        for (int i = 1; i < homeDecorSortList.size(); i++){
             HomeDecorModel key = homeDecorSortList.get(i);
             int j = i - 1;
 /* Compares the key with the sorted element j>=0. If the condition shouldSwap is true, 
 shifts elements one position to right to make space for the key */
-            while (j >= 0 && shouldSwap(homeDecorSortList.get(j), key, isDesc, sortBy)) {
-                homeDecorSortList.set(j + 1, homeDecorSortList.get(j));
+            while (j >= 0 && shouldSwap (homeDecorSortList.get(j), key, isDesc, sortBy)){
+                homeDecorSortList.set(j + 1,homeDecorSortList.get(j));
                 j--;
             }
 // Places the key in its corrected position within the sorted portion of the llist

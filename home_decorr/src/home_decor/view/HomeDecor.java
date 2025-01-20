@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
  * 23048574
  */
 public class HomeDecor extends javax.swing.JFrame {
-    private List<HomeDecorModel> productList;//holds the list of products
+    private List<HomeDecorModel> productList; //holds the list of products
     private ProductController productController;
     private java.awt.CardLayout cardLayout;
     private String selectedSortBy = null;
@@ -39,17 +39,14 @@ public class HomeDecor extends javax.swing.JFrame {
         initializeLayout();
         inputData();
         productController=new ProductController();
-        //product_table = new JTable();
     }
-    
-    
-    
-    // to change the panel
+      
+    // to navigate from one panel to another
     private void initializeLayout() {
         cardLayout = new java.awt.CardLayout();
         getContentPane().setLayout(cardLayout);
 
-        // Add panels with unique identifiers
+        // Adding with unique identifiers
         getContentPane().add(loadingPnl, "LoadingScreen");
         getContentPane().add(loginPnl, "LoginScreen");
         getContentPane().add(mainPanel, "MainScreen");
@@ -180,7 +177,6 @@ public class HomeDecor extends javax.swing.JFrame {
         productIdBtn = new javax.swing.JButton();
         priceBtn = new javax.swing.JButton();
         productBtn = new javax.swing.JButton();
-        resetBtn = new javax.swing.JButton();
         loginPnl = new javax.swing.JPanel();
         welcomePnl = new javax.swing.JPanel();
         welcomePic = new javax.swing.JLabel();
@@ -1433,8 +1429,6 @@ public class HomeDecor extends javax.swing.JFrame {
             }
         });
 
-        resetBtn.setText("Reset");
-
         javax.swing.GroupLayout productPnlLayout = new javax.swing.GroupLayout(productPnl);
         productPnl.setLayout(productPnlLayout);
         productPnlLayout.setHorizontalGroup(
@@ -1448,9 +1442,7 @@ public class HomeDecor extends javax.swing.JFrame {
                         .addComponent(priceBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(productBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(resetBtn)
-                        .addGap(54, 54, 54)
+                        .addGap(132, 132, 132)
                         .addComponent(ascRadioBtn)
                         .addGap(18, 18, 18)
                         .addComponent(descRadioBtn)
@@ -1471,7 +1463,6 @@ public class HomeDecor extends javax.swing.JFrame {
                     .addComponent(priceBtn)
                     .addComponent(productIdBtn)
                     .addComponent(productBtn)
-                    .addComponent(resetBtn)
                     .addComponent(descRadioBtn)
                     .addComponent(searchJField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchBtn))
@@ -1693,7 +1684,7 @@ public class HomeDecor extends javax.swing.JFrame {
     private void inputData() {
         productList = new LinkedList<>();
 
-        // Registering sample products
+        // Registering sample products fro displaying in the product table
         registerProduct(new HomeDecorModel(79128, "Floor Lamp", "Living Room", 10000,"Available","Ostrich Feather Lamp",20,15,"2012-12-12"));
         registerProduct(new HomeDecorModel(45126, "Table Lamp", "Study Room", 1200,"Available","Classic Banker's Lamp",20,10,"2010-12-12"));
         registerProduct(new HomeDecorModel(23457, "Wallpaper", "Decor", 1000,"Available","Nightingale Birds Gold",20,15,"2012-12-12"));
@@ -1703,8 +1694,6 @@ public class HomeDecor extends javax.swing.JFrame {
         updateOldProductCountLabel();
     }
     
-    // method to add product in the table
-    
     private void registerProduct(HomeDecorModel decor){
         productList.add(decor);
         DefaultTableModel model=(DefaultTableModel) productTbl.getModel();
@@ -1712,14 +1701,9 @@ public class HomeDecor extends javax.swing.JFrame {
             decor.getProduct_Id(),decor.getProduct_Name(),decor.getCategory(),decor.getPrice(),decor.getStatus(),decor.getDescription(),decor.getStockQuantity(),decor.getSold(),decor.getDate()
                 
         });
-       //updateProductCountLabel();
+       
     }
-    
-    //
-    
-    
-    
-    //
+  
     private void startProgress() {
         javax.swing.SwingWorker<Void, Integer> worker = new javax.swing.SwingWorker<>() {
             @Override
@@ -1748,16 +1732,7 @@ public class HomeDecor extends javax.swing.JFrame {
     private void loadScreen(String screenName) {
         cardLayout.show(getContentPane(), screenName);
     }
-    //
-    
-    /**
-     * Handles the logout button action. Clears the login fields and switches
-     * back to the login screen.
-     *
-     * @param evt The action event triggered by the logout button.
-     */
-   
-    //
+  
     private void productIdJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productIdJFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_productIdJFieldActionPerformed
@@ -1783,7 +1758,7 @@ public class HomeDecor extends javax.swing.JFrame {
     }//GEN-LAST:event_productNameJFieldActionPerformed
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-        // TODO add your handling code here:
+ 
         // Get the username and password input
         String username = usernameJField.getText();
         String password = new String(pswJField.getPassword());
@@ -1802,7 +1777,7 @@ public class HomeDecor extends javax.swing.JFrame {
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutButtonActionPerformed
-        // TODO add your handling code here:
+
         pswJField.setText("");
         usernameJField.setText("");
         loadScreen("LoginScreen"); // Load the main screen
@@ -1810,8 +1785,6 @@ public class HomeDecor extends javax.swing.JFrame {
     // Action Listener for the "Add" button
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         
-       
-     
         String productId = productIdJField.getText();
         String productName = productNameJField.getText();
         String category =  categoryJField.getText();  
@@ -1822,7 +1795,7 @@ public class HomeDecor extends javax.swing.JFrame {
         String sold = soldJField.getText();
         String date= dateJField.getText();
        
-        //reset background for all fields
+        //reseting background for all fields
         resetFieldColors();
         
         // call controller to add the product
@@ -1841,18 +1814,13 @@ public class HomeDecor extends javax.swing.JFrame {
             soldJField.setText("");
             descriptionJField.setText("");
             dateJField.setText("");
-            
-            
+                
             // Refresh the product table
-            //
-            
             refreshProductTable();
             
-            // update product count label
-            //ggg
-            
+            // update product count label in admin dashboard
             updateNewProductCountLabel();
-            // count bestseller
+            // count bestseller and update 
             updateBestSellerTable();
             //
             updateOutOfStockTable();
@@ -1862,15 +1830,14 @@ public class HomeDecor extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Validation failed. Please check the input fields.", "Error", JOptionPane.ERROR_MESSAGE);
             
-            // set red
+            // set red border in text fields for showing error
             highlightInvalidFields(productId,productName,category,price,status,description,stockQuantity,sold,date);
             
         }
     }
-
-        //
+   // refresh product table after every CRUD operation
    private void refreshProductTable() {
-        // Get the product list from the controller
+        // Get the product list from the controller package
         List<HomeDecorModel> productList = productController.getProductList();
 
         // Clear the existing rows in the table
@@ -1898,9 +1865,7 @@ updateProfitLabel();
 //ggg
 
 private void updateOldProductCountLabel() {
-    //ggg
     try {
-        //List<home_decor_model> productList = productController.getProductList();
         int productCount = productList.size(); // Total count of products
 
         if (noOfProductData != null) {
@@ -1913,9 +1878,8 @@ private void updateOldProductCountLabel() {
     }
     
 }
-//ggg
+
 private void updateNewProductCountLabel() {
-    //ggg
     try {
         List<HomeDecorModel> productList = productController.getProductList();
         int productCount = productList.size(); // Total count of products
@@ -1931,7 +1895,6 @@ private void updateNewProductCountLabel() {
     
 }
 
-//ggg
 private void updateBestSellerTable() {
     // Get the product list from the controller
     List<HomeDecorModel> productList = productController.getProductList();
@@ -1971,7 +1934,6 @@ private void updateBestSellerTable() {
     }
 }
 
-//ggg
 private void updateOutOfStockTable() {
     // Retrieve the product list
     List<HomeDecorModel> productList = productController.getProductList();
@@ -2006,7 +1968,7 @@ private void updateOutOfStockTable() {
         model.addRow(new Object[]{"All products in stock"});
     }
 }
-//ggg
+
 private void updateProfitLabel() {
     // Retrieve the product list from the controller
     List<HomeDecorModel> productList = productController.getProductList();
@@ -2028,8 +1990,7 @@ private void updateProfitLabel() {
     profitCountData.setText("Total Profit: $" + String.format("%.2f", totalProfit));
 }
 
-
-//
+// reset border of text fileds after error is removed
 private void resetFieldColors() {
     // Reset the background color of all fields to white
     productIdJField.setBackground(Color.WHITE);
@@ -2044,8 +2005,7 @@ private void resetFieldColors() {
 }
 
 private void highlightInvalidFields(String productId, String productName, String category, String price, String status, String description,String stockQuantity, String sold, String date) {
-    
-    
+   
     // Check each field and set background color to red if invalid
 
     if (!ValidationUtil.isValidProductId(productId)) {
@@ -2091,19 +2051,11 @@ private void highlightInvalidFields(String productId, String productName, String
         dateJField.setBackground(Color.RED);
         dateValidJField.setText("Follow YYYY-MM-DD");
     }
-
-//
-        
-    }//GEN-LAST:event_addBtnActionPerformed
-    //
     
-   
-
-//
+    }//GEN-LAST:event_addBtnActionPerformed
+  // Action Listener for the "Update" button
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-        // TODO add your handling code here:
-         
-         //
+       
      // Get the values from the input fields
         String productId = productIdJField.getText();
         String productName = productNameJField.getText();
@@ -2158,8 +2110,7 @@ private void highlightInvalidFields(String productId, String productName, String
 
     if (productFound) {
         JOptionPane.showMessageDialog(this, "Product updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-        ///ggg
-        
+       
         // Clear input fields
         productIdJField.setText("");
         productNameJField.setText("");
@@ -2175,15 +2126,14 @@ private void highlightInvalidFields(String productId, String productName, String
     }
          
     }//GEN-LAST:event_updateBtnActionPerformed
-
+    //  Action Listener for the "Clear" button
     private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
         
         // Clear the input fields
-        //gggg
         // Get the Product ID from the input field
     String productId = productIdJField.getText();
 
-    // Reset background for Product ID field
+    // Reset background for Product ID field to white after error is removed
     productIdJField.setBackground(Color.WHITE);
 
     // Validate Product ID
@@ -2220,18 +2170,9 @@ private void highlightInvalidFields(String productId, String productName, String
     }//GEN-LAST:event_clearBtnActionPerformed
 
     private void retrieveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retrieveBtnActionPerformed
-        
-        //ggg
-        
-
     // Refresh the product table to display the loaded data
     refreshProductTable();
-    
-    
-
-    JOptionPane.showMessageDialog(this, "Data loaded successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-
-        
+    JOptionPane.showMessageDialog(this, "Data loaded successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);   
     }//GEN-LAST:event_retrieveBtnActionPerformed
 
     private void soldJFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soldJFieldActionPerformed
@@ -2303,8 +2244,7 @@ private void handleSearchResult(List<HomeDecorModel> sortedProductList, int resu
 
 
     private void ascRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascRadioBtnActionPerformed
-        // TODO add your handling code here:
-        //ggg
+      
         if (selectedSortBy == null){
             JOptionPane.showMessageDialog(this,"Please select a sorting criteria");
             return;
@@ -2314,37 +2254,29 @@ private void handleSearchResult(List<HomeDecorModel> sortedProductList, int resu
     }//GEN-LAST:event_ascRadioBtnActionPerformed
 
     private void descRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descRadioBtnActionPerformed
-        // TODO add your handling code here:
+        
         if (selectedSortBy == null){
             JOptionPane.showMessageDialog(this,"Please select a sorting criteria");
             return;
         }
-        //String selectedCriteria = "id";
+   
     triggerSort(selectedSortBy, true);  
     }//GEN-LAST:event_descRadioBtnActionPerformed
 
     private void productIdBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productIdBtnActionPerformed
-        // TODO add your handling code here:
-        //String selectedCriteria = (String) ProductIdBtn.getSelectedItem();
-
-    // Get the selected sort order (ascending or descending)
-    ////boolean isDesc = DescRadioButton.isSelected();
-    
-    // Call the method from the controller to sort the data
-    //triggerSort("Product ID", isDesc);
     selectedSortBy = "Product ID";
     JOptionPane.showMessageDialog(this,"Sorting by Product ID. Chose the sorting order");
             
     }//GEN-LAST:event_productIdBtnActionPerformed
 
     private void productBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productBtnActionPerformed
-        // TODO add your handling code here:
+   
         selectedSortBy = "Product Name";
         JOptionPane.showMessageDialog(this,"Sorting by Product Name. Chose the sorting order");
     }//GEN-LAST:event_productBtnActionPerformed
 
     private void priceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceBtnActionPerformed
-        // TODO add your handling code here:
+       
          selectedSortBy = "Price";
         JOptionPane.showMessageDialog(this,"Sorting by Price. Chose the sorting order");
     }//GEN-LAST:event_priceBtnActionPerformed
@@ -2406,7 +2338,7 @@ private void handleSearchResult(List<HomeDecorModel> sortedProductList, int resu
     return sortedProductList;
 }
 private void updateProductTable(List<HomeDecorModel> productList) {
-    // Assuming you already have the method for updating the table with new data
+
     DefaultTableModel model = (DefaultTableModel) productTbl.getModel();
     
     model.setRowCount(0);  // Clear existing table rows
@@ -2569,7 +2501,6 @@ private void updateProductTable(List<HomeDecorModel> productList) {
     private javax.swing.JLabel pswLockPic;
     private javax.swing.JLabel quoteLbl;
     private javax.swing.JLabel quoteTxtLbl;
-    private javax.swing.JButton resetBtn;
     private javax.swing.JButton retrieveBtn;
     private javax.swing.JScrollPane scrollPanel;
     private javax.swing.JScrollPane scrollPnll;

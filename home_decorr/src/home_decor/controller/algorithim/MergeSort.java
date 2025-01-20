@@ -20,21 +20,22 @@ public class MergeSort {
     public List<HomeDecorModel> sort(List<HomeDecorModel> productList, boolean isDesc) {
 // Validates that the product list is not null or empty
         if (productList == null || productList.isEmpty()) {
-            throw new IllegalArgumentException("Product list cannot be null or empty.");
+            throw new IllegalArgumentException ("Product list cannot be null or empty. ");
         }
-
-        return mergeSort(productList, isDesc);
+        return mergeSort (productList, isDesc);
     }
     
 /* Checks whether the list has one or zero elements, if it is then it is already sorted
     so the method returns the list as it is */
-    private List<HomeDecorModel> mergeSort(List<HomeDecorModel> list, boolean isDesc) {
+    private List<HomeDecorModel> mergeSort(List<HomeDecorModel> list, boolean isDesc){
         if (list.size() <= 1) {
             return list;
         }
+
 // If the list has more than one element, it splits the list into two halves : left and right
 // It then recursively sorts both halves by calling mergeSort on each
 // After both halves are sorted, it merges them by calling merge method
+        
         int mid = list.size() / 2;
 
         List<HomeDecorModel> left = new ArrayList<>(list.subList(0, mid));
@@ -54,8 +55,9 @@ public class MergeSort {
 
         while (leftIndex < left.size() && rightIndex < right.size()) {
             boolean shouldTakeFromLeft = isDesc
-                    ? left.get(leftIndex).getPrice() > right.get(rightIndex).getPrice()
+                    ? left.get(leftIndex).getPrice() > right.get (rightIndex).getPrice()
                     : left.get(leftIndex).getPrice() < right.get(rightIndex).getPrice();
+        
 
             if (shouldTakeFromLeft) {
                 merged.add(left.get(leftIndex));
@@ -65,13 +67,13 @@ public class MergeSort {
                 rightIndex++;
             }
         }
-
-        while (leftIndex < left.size()) {
+        
+        while (leftIndex < left.size()){
             merged.add(left.get(leftIndex));
             leftIndex++;
         }
-
-        while (rightIndex < right.size()) {
+        
+        while (rightIndex < right.size()){
             merged.add(right.get(rightIndex));
             rightIndex++;
         }

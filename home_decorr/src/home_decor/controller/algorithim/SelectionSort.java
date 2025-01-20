@@ -3,11 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package home_decor.controller.algorithim;
-//ggg
 
-import home_decor.model.HomeDecorModel;
 import java.util.ArrayList;
 import java.util.List;
+import home_decor.model.HomeDecorModel;
 
 /**
  *
@@ -26,17 +25,16 @@ public class SelectionSort {
         this.homeDecorSortList.addAll(productList);
 // Validates the list is not null or empty
         if (homeDecorSortList == null || homeDecorSortList.isEmpty()) {
-            throw new IllegalArgumentException("Product list cannot be null or empty.");
+            throw new IllegalArgumentException ("Product list cannot be null or empty. ");
         }
 // The loop iterates through the list, treating elements from i to the end as the unsorted portion
-        for (int i = 0; i < homeDecorSortList.size() - 1; i++) {
-            int extremumIndex = findExtremumIndex(homeDecorSortList, i, isDesc,sortBy);
+        for (int i = 0; i< homeDecorSortList.size() -1; i++) {
+            int extremumIndex = findExtremumIndex (homeDecorSortList, i, isDesc, sortBy);
 // Swaps method exchanges the vaue at indices i and extremeIndex, if the extremum value is not already at index i
             if (i != extremumIndex) {
                 swap(homeDecorSortList, i, extremumIndex);
             }
         }
-
         return homeDecorSortList;
     }
     //Finds the index of the extremum value (minimum or maximum) in the list from the start index.
@@ -47,18 +45,19 @@ public class SelectionSort {
     
     private int findExtremumIndex(List<HomeDecorModel> productSortList, int startIndex, boolean isDesc, String sortBy) {
         int extremumIndex = startIndex;
-
-        for (int j = startIndex + 1; j < productSortList.size(); j++) {
+        
+        for (int j = startIndex + 1; j < productSortList.size(); j++){
             boolean shouldSwap = false;
             if ("Product ID".equalsIgnoreCase(sortBy)){
-                shouldSwap = shouldSwap(homeDecorSortList.get(j).getProduct_Id(), homeDecorSortList.get(extremumIndex).getProduct_Id(), isDesc);
+                shouldSwap = shouldSwap(homeDecorSortList.get(j).getProduct_Id(), homeDecorSortList.get(extremumIndex).getProduct_Id(),isDesc);
+                
             }
-            if (shouldSwap) {
+            if (shouldSwap){
                 extremumIndex = j;
             }
         }
-
         return extremumIndex;
+        
     }
 
     
@@ -77,7 +76,7 @@ public class SelectionSort {
     // i the index of the first element
     // j the index of the second element
     
-    private void swap(List<HomeDecorModel> homeDecorSortList, int i, int j) {
+    private void swap (List<HomeDecorModel> homeDecorSortList,int i, int j) {
         HomeDecorModel temp = homeDecorSortList.get(i);
         homeDecorSortList.set(i, homeDecorSortList.get(j));
         homeDecorSortList.set(j, temp);

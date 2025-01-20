@@ -4,14 +4,11 @@
  */
 package home_decor.controller;
 
-
 import home_decor.model.HomeDecorModel;
 import home_decor.util.ValidationUtil;
-
 import java.util.ArrayList;
 import java.util.List;
 
-;
 /**
  *
  * @author Riya Bhatta
@@ -19,22 +16,13 @@ import java.util.List;
  */
 public class ProductController {
     private List<HomeDecorModel> productList= new ArrayList<>();
-    // Assuming the view and model are passed during initialization
-    //private HomeDecor productView;
-   // private HomeDecorModel productModel;
-
+    
     public ProductController() {
         productList = new ArrayList<>();
-        //this.productView = view;
-        //this.productModel = model;
+        
     }
-    //ggg
-    
-    
-    
-    
-    //
-    public boolean addProduct(String productId,String productName,String category,String price,String status,String description,String stockQuantity,String sold,String date) {
+ 
+    public boolean addProduct (String productId, String productName, String category, String price, String status,String description, String stockQuantity, String sold, String date){
         if (!ValidationUtil.isValidProductId(productId) ||
             !ValidationUtil.isValidProductName(productName) ||
             !ValidationUtil.isValidCategory(category) ||
@@ -47,8 +35,7 @@ public class ProductController {
         {
             return false;
         }
-        
-        // ggg
+
         HomeDecorModel product = new HomeDecorModel(
                 Integer.parseInt(productId),
                 productName,
@@ -58,24 +45,16 @@ public class ProductController {
                 description,
                 Integer.parseInt(stockQuantity),
                 Integer.parseInt(sold),
-                //Integer.parseInt(date)
-                date// Assuming date format is YYYYMMDD
-            );
-
-        // Add the product to the product list
+                date
+        );
+        
         productList.add(product);
-        
-        
-                return true;
-    
+            return true;
     }
     
-
-    public List<HomeDecorModel> getProductList() {
+    public List<HomeDecorModel> getProductList(){
         return productList;
-  }
-    
-    
+    }   
 }
 
 
